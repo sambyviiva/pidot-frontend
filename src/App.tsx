@@ -1,6 +1,14 @@
-import { useEffect, useState } from "react";
-import "./App.css";
+import { Box, SxProps } from "@mui/material";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import {
+  Link,
+  Route,
+  Routes
+} from "react-router-dom";
+import AppNavBar from "./components/AppNavBar";
+import CreateNew from "./pages/CreateNew";
+import MyEvents from "./pages/MyEvents";
 
 interface IEvent {
   name: string;
@@ -8,25 +16,44 @@ interface IEvent {
   endDate: Date;
 }
 
+const appStyles: SxProps = {
+};
+
+export const pages = [
+  { name: "New Event", id: "new" },
+  { name: "My Events", id: "my" },
+];
+
+export const APP_NAME = "PIDOT"
+
 function App() {
-  const [events, setEvents] = useState<IEvent[]>([]);
+  // const [events, setEvents] = useState<IEvent[]>([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const e = await axios.get("https://pidot-event-api.onrender.com/event");
-      setEvents(e.data);
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const e = await axios.get("https://pidot-event-api.onrender.com/event");
+  //     setEvents(e.data);
+  //   };
 
-    fetchData().catch(console.error);
-  }, []);
+  //   fetchData().catch(console.error);
+  // }, []);
   return (
     <>
-      <div>events:</div>
-      <div>
-        {events?.map((e) => (
-          <div>{e.name}</div>
-        ))}
-      </div>
+      <Box sx={appStyles}>
+        <AppNavBar />
+        {/* <div>events:</div>
+        <div>
+          {events?.map((e) => (
+            <div key={e.name + Math.random()}>{e.name}</div>
+          ))}
+        </div>
+        <Link to="/my">My</Link> */}
+        <Routes>
+          <Route path="/" element={<div>Hello world!</div>} />
+          <Route path="/my" element={<MyEvents penkki={123} />} />
+          <Route path="/new" element={<CreateNew penkki={123} />} />
+        </Routes>
+      </Box>
     </>
   );
 }
