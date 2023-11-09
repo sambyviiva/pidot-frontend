@@ -23,7 +23,7 @@ export const theme = createTheme({
         root: {},
         input: {
           color: "grey",
-          borderBottom: " 2px solid grey",
+          borderBottom: "2px solid grey",
         },
       },
     },
