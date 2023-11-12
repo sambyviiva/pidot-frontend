@@ -16,8 +16,8 @@ interface ICreateNewProps {
 const FIELD_CONTAINER_WIDTH = "400px";
 
 const containerStyles: SxProps = {
-  // ...APP_BACKGROUND,
-  bgcolor: "red",
+  ...APP_BACKGROUND,
+  // bgcolor: "red",
 };
 
 const titleStyles: SxProps = {
@@ -54,7 +54,7 @@ const fieldFullStyles: SxProps = {
 };
 
 const CreateNew: React.FC<ICreateNewProps> = () => {
-  const [firstPageActive, setFirstPageActive] = useState<boolean>(false);
+  const [firstPageActive, setFirstPageActive] = useState<boolean>(true);
   return (
     <Box sx={containerStyles}>
       <Box sx={titleStyles}>Create New</Box>
