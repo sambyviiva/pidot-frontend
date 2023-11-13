@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material";
-import { green, orange, grey } from "@mui/material/colors";
+import { orange, grey } from "@mui/material/colors";
 
 export const theme = createTheme({
   palette: {
@@ -7,39 +7,49 @@ export const theme = createTheme({
       main: orange[500],
     },
     secondary: {
-      main: green[500],
+      main: grey[500],
     },
   },
   components: {
     MuiInput: {
       styleOverrides: {
-        root: {
-          color: grey[500],
-          borderBottom: `1px solid ${grey[500]}`,
-          ":hover": {
-            borderBottom: `1px solid ${grey[700]}`,
+        root: ({ theme }) => ({
+          color: theme.palette.secondary.main,
+          ":before": {
+            borderBottom: `1px solid ${theme.palette.secondary.main}`,
           },
-        },
+        }),
       },
     },
     MuiOutlinedInput: {
       styleOverrides: {
-        root: {
+        root: ({ theme }) => ({
+          color: "white",
           "& .MuiOutlinedInput-notchedOutline": {
-            borderColor: orange[500],
+            borderColor: theme.palette.primary.main,
             borderWidth: 2,
           },
           "&:hover .MuiOutlinedInput-notchedOutline": {
-            borderColor: orange[500],
+            borderColor: theme.palette.primary.main,
           },
-        },
+        }),
+      },
+    },
+    MuiFilledInput: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          color: theme.palette.secondary.main,
+          ":before": {
+            borderBottom: `1px solid ${theme.palette.secondary.main}`,
+          },
+        }),
       },
     },
     MuiInputLabel: {
       styleOverrides: {
-        root: {
-          color: grey[500],
-        },
+        root: ({ theme }) => ({
+          color: theme.palette.secondary.main,
+        }),
       },
     },
   },
