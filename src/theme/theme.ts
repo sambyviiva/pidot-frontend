@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material";
-import { green, orange } from "@mui/material/colors";
+import { green, orange, grey } from "@mui/material/colors";
 
 export const theme = createTheme({
   palette: {
@@ -14,9 +14,10 @@ export const theme = createTheme({
     MuiInput: {
       styleOverrides: {
         root: {
-          color: "grey",
-          "&:before": {
-            borderBottom: "1px solid grey",
+          color: grey[500],
+          borderBottom: `1px solid ${grey[500]}`,
+          ":hover": {
+            borderBottom: `1px solid ${grey[700]}`,
           },
         },
       },
@@ -29,8 +30,7 @@ export const theme = createTheme({
             borderWidth: 2,
           },
           "&:hover .MuiOutlinedInput-notchedOutline": {
-            borderColor: orange[800],
-            borderWidth: 2,
+            borderColor: orange[500],
           },
         },
       },
@@ -38,18 +38,9 @@ export const theme = createTheme({
     MuiInputLabel: {
       styleOverrides: {
         root: {
-          color: "grey",
+          color: grey[500],
         },
       },
     },
-    // MuiInputBase: {
-    //   styleOverrides: {
-    //     root: {},
-    //     input: {
-    //       color: "grey",
-    //       borderBottom: "2px solid grey",
-    //     },
-    //   },
-    // },
   },
 });
