@@ -5,10 +5,12 @@ import {
   TextField,
   Typography,
   Checkbox,
+  InputAdornment,
 } from "@mui/material";
 import { useState } from "react";
 import { APP_BACKGROUND } from "../../common/styles";
-
+import { MobileDateTimePicker } from "@mui/x-date-pickers";
+import { AddLocationAlt } from "@mui/icons-material";
 interface ICreateNewProps {
   penkki: number;
 }
@@ -37,10 +39,16 @@ const fullFieldContainerStyles: SxProps = {
 const doupleFieldContainerStyles: SxProps = {
   display: "flex",
   justifyContent: "space-between",
-  flexDirection: "row",
   py: "24px",
   width: FIELD_CONTAINER_WIDTH,
   margin: "auto",
+};
+
+const labelFieldContainerStyles: SxProps = {
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  width: "48%",
 };
 
 const buttonContainerStyles: SxProps = {
@@ -70,56 +78,80 @@ const CreateNew: React.FC<ICreateNewProps> = () => {
 interface IFirstPageProps {
   goToNextPage: () => void;
 }
-const FirstPage = (props: IFirstPageProps) => (
-  <>
-    <Box sx={fullFieldContainerStyles}>
-      <TextField
-        sx={fieldFullStyles}
-        id="name"
-        label="Name"
-        variant="standard"
-      />
-    </Box>
-    <Box sx={doupleFieldContainerStyles}>
-      <TextField
-        // sx={}
-        id="startDate"
-        label="Start Date"
-        variant="standard"
-      />
-      <TextField
-        // sx={}
-        id="endDate"
-        label="End Date"
-        variant="standard"
-      />
-    </Box>
-    <Box sx={fullFieldContainerStyles}>
-      <TextField
-        sx={fieldFullStyles}
-        id="location"
-        label="Location"
-        variant="standard"
-      />
-    </Box>
-    <Box sx={fullFieldContainerStyles}>
-      <TextField
-        multiline
-        rows={4}
-        maxRows={8}
-        sx={fieldFullStyles}
-        id="location"
-        label="Additional Information"
-        variant="outlined"
-      />
-    </Box>
-    <Box sx={buttonContainerStyles}>
-      <Button variant="contained" onClick={() => props.goToNextPage()}>
-        Next
-      </Button>
-    </Box>
-  </>
-);
+const FirstPage = (props: IFirstPageProps) => {
+  return (
+    <>
+      <Box sx={fullFieldContainerStyles}>
+        <TextField
+          sx={fieldFullStyles}
+          id="name"
+          label="Name"
+          variant="standard"
+        />
+      </Box>
+      <Box sx={doupleFieldContainerStyles}>
+        <Box sx={labelFieldContainerStyles}>
+          <Typography color="secondary" sx={{ ml: "2px" }}>
+            Start Time
+          </Typography>
+          <MobileDateTimePicker
+            ampm={false}
+            slotProps={{
+              textField: {
+                variant: "filled",
+              },
+            }}
+          />
+        </Box>
+
+        <Box sx={labelFieldContainerStyles}>
+          <Typography color="secondary" sx={{ ml: "2px" }}>
+            End Time
+          </Typography>
+          <MobileDateTimePicker
+            ampm={false}
+            slotProps={{
+              textField: {
+                variant: "filled",
+              },
+            }}
+          />
+        </Box>
+      </Box>
+      <Box sx={fullFieldContainerStyles}>
+        <TextField
+          sx={fieldFullStyles}
+          id="location"
+          label="Location"
+          variant="standard"
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <AddLocationAlt color="secondary" />
+              </InputAdornment>
+            ),
+          }}
+        />
+      </Box>
+      <Box sx={fullFieldContainerStyles}>
+        <TextField
+          multiline
+          rows={4}
+          maxRows={8}
+          sx={fieldFullStyles}
+          id="location"
+          label="Additional Information"
+          variant="outlined"
+        />
+      </Box>
+      <Box sx={buttonContainerStyles}>
+        <Button variant="contained" onClick={() => props.goToNextPage()}>
+          Next
+        </Button>
+      </Box>
+    </>
+  );
+};
 
 const invTitleStyles: SxProps = {
   display: "flex",
@@ -142,7 +174,7 @@ const invAvecCountContainerStyles: SxProps = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  ml: '20px'
+  ml: "20px",
 };
 
 interface ISecondPageProps {
