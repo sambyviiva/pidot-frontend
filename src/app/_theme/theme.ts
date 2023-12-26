@@ -7,7 +7,7 @@ export const theme = createTheme({
       main: orange[500],
     },
     secondary: {
-      main: grey[500],
+      main: grey[200]
     },
   },
   components: {
@@ -49,6 +49,16 @@ export const theme = createTheme({
       styleOverrides: {
         root: ({ theme }) => ({
           color: theme.palette.secondary.main,
+        }),
+      },
+    },
+    MuiCheckbox: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          color: theme.palette.secondary.main,
+          // "&.Mui-checked": {
+          //   color: palette.secondary,
+          // }
         }),
       },
     },
