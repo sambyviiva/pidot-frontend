@@ -1,5 +1,3 @@
-"use client";
-
 import { AddLocationAlt } from "@mui/icons-material";
 import { Box, InputAdornment, TextField, Typography } from "@mui/material";
 import {
@@ -7,28 +5,33 @@ import {
   MobileDateTimePicker,
 } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { Dispatch, SetStateAction, useState } from "react";
+import dayjs, { Dayjs } from "dayjs";
+import { useState } from "react";
 import {
-  ICreateNewFieldValues,
   doupleFieldContainerStyles,
   fieldFullStyles,
   fullFieldContainerStyles,
   labelFieldContainerStyles,
 } from "../page";
-import { Dayjs } from "dayjs";
+import { UseFormRegister } from "react-hook-form";
+import { FormInputs } from "../../../../lib/types";
 
-export const FirstPage = () => {
-  const [start, setStart] = useState<Dayjs | null>(null);
-  const [end, setEnd] = useState<Dayjs | null>(null);
+interface IFirstPageProps {
+  register: UseFormRegister<FormInputs>;
+}
+
+export const FirstPage = (props: IFirstPageProps) => {
+  const { register } = props;
+  const [start, setStart] = useState<Dayjs | null>(dayjs());
+  const [end, setEnd] = useState<Dayjs | null>(dayjs());
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <Box sx={fullFieldContainerStyles}>
         <TextField
           sx={fieldFullStyles}
-          id="name"
           label="name"
-          name="name"
           variant="standard"
+          {...register("name")}
         />
       </Box>
       <Box sx={doupleFieldContainerStyles}>
@@ -36,7 +39,11 @@ export const FirstPage = () => {
           <Typography color="secondary" sx={{ ml: "2px" }}>
             Start Time
           </Typography>
-          <input type="hidden" name="start" value={start?.toISOString()} />
+          <input
+            type="hidden"
+            value={start?.toISOString()}
+            {...register("start")}
+          />
           <MobileDateTimePicker
             ampm={false}
             slotProps={{
@@ -53,7 +60,11 @@ export const FirstPage = () => {
           <Typography color="secondary" sx={{ ml: "2px" }}>
             End Time
           </Typography>
-          <input type="hidden" name="end" value={end?.toISOString()} />
+          <input
+            type="hidden"
+            value={end?.toISOString()}
+            {...register("end")}
+          />
           <MobileDateTimePicker
             ampm={false}
             slotProps={{
@@ -69,10 +80,9 @@ export const FirstPage = () => {
       <Box sx={fullFieldContainerStyles}>
         <TextField
           sx={fieldFullStyles}
-          id="location"
           label="Location"
-          name="location"
           variant="standard"
+          {...register("location")}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
@@ -87,10 +97,9 @@ export const FirstPage = () => {
           multiline
           rows={4}
           sx={fieldFullStyles}
-          id="additionaInfo"
-          name="additionaInfo"
           label="Additional Information"
           variant="outlined"
+          {...register("additionaInfo")}
         />
       </Box>
     </LocalizationProvider>

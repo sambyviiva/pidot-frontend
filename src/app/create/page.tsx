@@ -1,13 +1,17 @@
-import { Box, Button, SxProps, Typography } from "@mui/material";
+"use client";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Box, SxProps, Typography } from "@mui/material";
 import { Dayjs } from "dayjs";
-import { useState } from "react";
-import axios from "axios";
+import { useRouter } from "next/navigation";
+import { useRef, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { EventSchema, FormInputs, FormInputsSchema } from "../../../lib/types";
 import { APP_BACKGROUND } from "../_common/styles";
+import { addEvent } from "./actions/addEvent";
 import { FirstPage } from "./components/FirstPage";
+import { FormButtons } from "./components/FormButtons";
 import { SecondPage } from "./components/SecondPage";
-import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
-import { FormFields } from "./FormFields";
-import { createEvent } from "./actions/createAction";
 
 const FIELD_CONTAINER_WIDTH = "400px";
 
@@ -33,11 +37,19 @@ const titleStyles: SxProps = {
   fontWeight: 700,
 };
 
+const buttonsDivStyles: SxProps = {
+  width: "100%",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  pt: "40px",
+};
+
 export const fullFieldContainerStyles: SxProps = {
   display: "flex",
   justifyContent: "center",
   width: "100%",
-  py: "24px",
+  pt: "24px",
 };
 
 export const doupleFieldContainerStyles: SxProps = {
@@ -70,30 +82,59 @@ export interface ICreateNewFieldValues {
   attendees: string;
 }
 
-const buttonContainerStyles: SxProps = {
-  py: "24px",
-};
-
-const twoButtonsContainerStyles: SxProps = {
-  display: "flex",
-  justifyContent: "space-between",
-  width: "300px",
-  py: "24px",
-};
-
-const INITIAL_VALUES: ICreateNewFieldValues = {
-  name: "",
-  startDate: null,
-  endDate: null,
-  location: "",
-  additionalInformation: "",
-  invitationCount: undefined,
-  avecsWelcome: false,
-  avecCount: undefined,
-  attendees: "",
-};
-
 const CreateNew: React.FC = () => {
+  const [firstPageActive, setFirstPageActive] = useState<boolean>(true);
+  const formRef = useRef<HTMLFormElement>(null);
+  const router = useRouter();
+
+  const clientAction = async (formData: FormData) => {
+    // client side validation
+    const validatedDataResult = EventSchema.safeParse({
+      name: formData.get("name"),
+      startDate: formData.get("start"),
+      endDate: formData.get("end"),
+    });
+
+    if (!validatedDataResult.success) {
+      let errorMessage = "";
+      validatedDataResult.error.issues.forEach((issue) => {
+        errorMessage =
+          errorMessage + issue.path[0] + ": " + issue.message + ". ";
+      });
+      console.error(errorMessage);
+      return;
+    }
+
+    const response = await addEvent(validatedDataResult.data);
+
+    if (response?.error) {
+      console.error("Server error: " + response.error);
+    } else {
+      formRef.current?.reset();
+      router.push("/events");
+    }
+  };
+
+  const processForm: SubmitHandler<FormInputs> = async (data) => {
+    const response = await addEvent(data);
+
+    if (response?.error) {
+      console.error("Server error: " + response.error);
+    }
+    reset();
+    router.push("/events");
+  };
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    trigger,
+    formState: { errors },
+  } = useForm<FormInputs>({
+    resolver: zodResolver(FormInputsSchema),
+  });
+
   return (
     <Box sx={containerStyles}>
       <Box sx={fieldsContainerStyles}>
@@ -103,8 +144,24 @@ const CreateNew: React.FC = () => {
           </Typography>
         </Box>
 
-        <form action={createEvent}>
-          <FormFields />
+        <form
+          ref={formRef}
+          action={clientAction}
+          onSubmit={handleSubmit(processForm)}
+        >
+          {firstPageActive ? (
+            <FirstPage register={register} />
+          ) : (
+            <SecondPage register={register} />
+          )}
+          <Box>{errors.name?.message}</Box>
+          <Box sx={buttonsDivStyles}>
+            <FormButtons
+              firstPageActive={firstPageActive}
+              setFirstPageActive={setFirstPageActive}
+              trigger={trigger}
+            />
+          </Box>
         </form>
       </Box>
     </Box>
