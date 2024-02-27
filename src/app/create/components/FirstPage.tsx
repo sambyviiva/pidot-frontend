@@ -1,5 +1,12 @@
 import { AddLocationAlt } from "@mui/icons-material";
-import { Box, InputAdornment, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  InputAdornment,
+  InputLabel,
+  TextField,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import {
   LocalizationProvider,
   MobileDateTimePicker,
@@ -13,28 +20,59 @@ import {
   fullFieldContainerStyles,
   labelFieldContainerStyles,
 } from "../page";
-import { UseFormRegister } from "react-hook-form";
+import { Control, UseFormRegister } from "react-hook-form";
 import { FormInputs } from "../../../../lib/types";
+import Dropzone from "./Dropzone";
+import CategorySelect from "./CategorySelect";
 
 interface IFirstPageProps {
   register: UseFormRegister<FormInputs>;
+  imageFile: File | null;
+  setImageFile: (file: File) => void;
+  control: Control<FormInputs>;
 }
 
 export const FirstPage = (props: IFirstPageProps) => {
-  const { register } = props;
+  const { register, imageFile, setImageFile, control } = props;
+  const theme = useTheme();
   const [start, setStart] = useState<Dayjs | null>(dayjs());
   const [end, setEnd] = useState<Dayjs | null>(dayjs());
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <Box sx={fullFieldContainerStyles}>
+      <Box sx={{ ...fullFieldContainerStyles, ...{ marginBottom: "60px" } }}>
         <TextField
           sx={fieldFullStyles}
-          label="name"
+          label="Event name"
           variant="standard"
           {...register("name")}
         />
       </Box>
-      <Box sx={doupleFieldContainerStyles}>
+      <Box sx={{ display: "flex", justifyContent: "center", marginBottom: "40px" }}>
+        <CategorySelect control={control} />
+      </Box>
+      {/* <Box sx={fileChooserContainerStyles}>
+        <input type="file" id="file" name="file" accept="images/*" hidden />
+        <InputLabel
+          sx={{
+            ...fileChooserStyles,
+            ...{ backgroundColor: theme.palette.primary.main },
+          }}
+          htmlFor="file"
+        >
+          Upload File
+        </InputLabel>
+      </Box> */}
+      <Typography
+        sx={{ marginBottom: "5px" }}
+        variant="h6"
+        color={theme.palette.secondary.main}
+      >
+        Event Image:
+      </Typography>
+      <Box sx={{ marginBottom: "50px" }}>
+        <Dropzone imageFile={imageFile} setImageFile={setImageFile} />
+      </Box>
+      {/* <Box sx={doupleFieldContainerStyles}>
         <Box sx={labelFieldContainerStyles}>
           <Typography color="secondary" sx={{ ml: "2px" }}>
             Start Time
@@ -91,17 +129,7 @@ export const FirstPage = (props: IFirstPageProps) => {
             ),
           }}
         />
-      </Box>
-      <Box sx={fullFieldContainerStyles}>
-        <TextField
-          multiline
-          rows={4}
-          sx={fieldFullStyles}
-          label="Additional Information"
-          variant="outlined"
-          {...register("additionaInfo")}
-        />
-      </Box>
+      </Box> */}
     </LocalizationProvider>
   );
 };
