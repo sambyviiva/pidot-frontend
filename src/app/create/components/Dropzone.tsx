@@ -2,6 +2,7 @@ import { Box, Button, useTheme } from "@mui/material";
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
+import { APP_BACKGROUND } from "@/app/_common/styles";
 
 interface IDropzoneProps {
   imageFile: File | null;
@@ -58,6 +59,7 @@ const Dropzone = (props: IDropzoneProps) => {
   };
 
   const baseStyle = {
+    ...APP_BACKGROUND,
     width: "400px",
     height: "230px",
     display: "flex",
@@ -66,7 +68,6 @@ const Dropzone = (props: IDropzoneProps) => {
     padding: "60px",
     border: `3px dotted ${theme.palette.primary.main}`,
     borderRadius: 5,
-    backgroundColor: "#343434",
     outline: "none",
     color: theme.palette.secondary.main,
   } as React.CSSProperties;

@@ -30,7 +30,7 @@ export default function RootLayout({
             <Provider>
               <Header />
               <AppContainer>{children}</AppContainer>
-              <Footer />
+              {/* <Footer /> */}
             </Provider>
           </ThemeRegistry>
       </body>

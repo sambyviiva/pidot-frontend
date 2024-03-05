@@ -2,9 +2,10 @@
 
 import { revalidatePath } from "next/cache";
 import {
+  GetObjectCommand,
+  GetObjectCommandInput,
   PutObjectCommand,
   PutObjectCommandInput,
-  S3Client,
 } from "@aws-sdk/client-s3";
 import { s3Client } from "./_aws/s3Client";
 
@@ -63,3 +64,17 @@ export async function uploadFile(prevState: IFormState, formData: FormData) {
     };
   }
 }
+
+export const getImageFromS3Action = async () => {
+  "use server";
+  console.log("Start");
+  console.log("Region: " + process.env.AWS_REGION);
+  const commandInput: GetObjectCommandInput = {
+    Bucket: "pidot-event-images",
+    Key: "samantha-gades-fIHozNWfcvs-unsplash.jpg",
+  };
+  const command: GetObjectCommand = new GetObjectCommand(commandInput);
+  const response = await s3Client.send(command);
+  const responseString = await response.Body?.transformToString()
+  console.log(`respons: ${responseString}`);
+};
