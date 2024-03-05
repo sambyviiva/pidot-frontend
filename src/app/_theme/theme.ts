@@ -4,10 +4,14 @@ import { orange, grey } from "@mui/material/colors";
 export const theme = createTheme({
   palette: {
     primary: {
-      main: orange[500],
+      main: "#B4A0E5",
+      dark: orange[700],
+      // main: orange[500],
+      // dark: orange[700],
     },
     secondary: {
-      main: grey[200]
+      main: "#FEF250",
+      // main: grey[200],
     },
   },
   components: {
@@ -30,8 +34,18 @@ export const theme = createTheme({
             borderWidth: 2,
           },
           "&:hover .MuiOutlinedInput-notchedOutline": {
-            borderColor: theme.palette.primary.main,
+            borderColor: theme.palette.primary.dark,
           },
+          "&:focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "green",
+          },
+        }),
+      },
+    },
+    MuiSelect: {
+      styleOverrides: {
+        icon: ({ theme }) => ({
+          color: theme.palette.secondary.main,
         }),
       },
     },

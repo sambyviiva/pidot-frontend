@@ -1,11 +1,13 @@
 "use server";
 
 import axios, { isAxiosError } from "axios";
-import { EventSchema } from "../../../../lib/types";
+import { FormInputsSchema } from "../../../../lib/types";
+import { Nova_Slim } from "next/font/google";
 
 export const addEvent = async (newEvent: unknown) => {
   // server side validation
-  const inputValidationResult = EventSchema.safeParse(newEvent);
+  console.log(JSON.stringify(newEvent));
+  const inputValidationResult = FormInputsSchema.safeParse(newEvent);
   if (!inputValidationResult.success) {
     let errorMessage = "";
     inputValidationResult.error.issues.forEach((issue) => {

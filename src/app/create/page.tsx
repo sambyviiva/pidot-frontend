@@ -3,10 +3,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, SxProps, Typography } from "@mui/material";
 import { Dayjs } from "dayjs";
-import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { EventSchema, FormInputs, FormInputsSchema } from "../../../lib/types";
+import { useForm } from "react-hook-form";
+import { FormInputs, FormInputsSchema } from "../../../lib/types";
 import { APP_BACKGROUND } from "../_common/styles";
 import { addEvent } from "./actions/addEvent";
 import { FirstPage } from "./components/FirstPage";
@@ -20,6 +19,7 @@ const containerStyles: SxProps = {
   // bgcolor: "red",
   display: "flex",
   justifyContent: "center",
+  paddingBottom: "20px",
 };
 
 const fieldsContainerStyles: SxProps = {
@@ -32,7 +32,7 @@ const fieldsContainerStyles: SxProps = {
 const titleStyles: SxProps = {
   display: "flex",
   justifyContent: "center",
-  py: "24px",
+  pt: "50px",
   fontSize: "24px",
   fontWeight: 700,
 };
@@ -42,7 +42,7 @@ const buttonsDivStyles: SxProps = {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  pt: "40px",
+  // pt: "40px",
 };
 
 export const fullFieldContainerStyles: SxProps = {
@@ -70,12 +70,17 @@ export const fieldFullStyles: SxProps = {
   width: "100%",
 };
 
+export const errorContainerStyles: SxProps = {
+  height: "20px",
+  paddingTop: "10px",
+};
+
 export interface ICreateNewFieldValues {
   name: string;
   startDate: Dayjs | null;
   endDate: Dayjs | null;
   location: string;
-  additionalInformation: string;
+  description: string;
   invitationCount?: number;
   avecsWelcome: boolean;
   avecCount?: number;
@@ -84,46 +89,35 @@ export interface ICreateNewFieldValues {
 
 const CreateNew: React.FC = () => {
   const [firstPageActive, setFirstPageActive] = useState<boolean>(true);
-  const formRef = useRef<HTMLFormElement>(null);
-  const router = useRouter();
+  const [imageFile, setImageFile] = useState<File | null>(null);
 
-  const clientAction = async (formData: FormData) => {
-    // client side validation
-    const validatedDataResult = EventSchema.safeParse({
-      name: formData.get("name"),
-      startDate: formData.get("start"),
-      endDate: formData.get("end"),
-    });
+  // const clientAction = async (formData: FormData) => {
+  // client side validation
+  // const validatedDataResult = EventSchema.safeParse({
+  //   name: formData.get("name"),
+  //   startDate: formData.get("start"),
+  //   endDate: formData.get("end"),
+  // });
 
-    if (!validatedDataResult.success) {
-      let errorMessage = "";
-      validatedDataResult.error.issues.forEach((issue) => {
-        errorMessage =
-          errorMessage + issue.path[0] + ": " + issue.message + ". ";
-      });
-      console.error(errorMessage);
-      return;
-    }
+  // if (!validatedDataResult.success) {
+  //   let errorMessage = "";
+  //   validatedDataResult.error.issues.forEach((issue) => {
+  //     errorMessage =
+  //       errorMessage + issue.path[0] + ": " + issue.message + ". ";
+  //   });
+  //   console.error(errorMessage);
+  //   return;
+  // }
 
-    const response = await addEvent(validatedDataResult.data);
+  // const response = await addEvent(validatedDataResult.data);
 
-    if (response?.error) {
-      console.error("Server error: " + response.error);
-    } else {
-      formRef.current?.reset();
-      router.push("/events");
-    }
-  };
-
-  const processForm: SubmitHandler<FormInputs> = async (data) => {
-    const response = await addEvent(data);
-
-    if (response?.error) {
-      console.error("Server error: " + response.error);
-    }
-    reset();
-    router.push("/events");
-  };
+  // if (response?.error) {
+  //   console.error("Server error: " + response.error);
+  // } else {
+  // formRef.current?.reset();
+  // router.push("/events");
+  //   }
+  // };
 
   const {
     register,
@@ -131,38 +125,45 @@ const CreateNew: React.FC = () => {
     reset,
     trigger,
     formState: { errors },
+    control
   } = useForm<FormInputs>({
-    resolver: zodResolver(FormInputsSchema),
+    // resolver: zodResolver(FormInputsSchema),
   });
 
   return (
     <Box sx={containerStyles}>
       <Box sx={fieldsContainerStyles}>
         <Box sx={titleStyles}>
-          <Typography variant="h3" color="secondary">
-            Create New
+          <Typography variant="h4" color="secondary">
+            Create Event
           </Typography>
         </Box>
 
-        <form
-          ref={formRef}
-          action={clientAction}
-          onSubmit={handleSubmit(processForm)}
-        >
+        <form>
           {firstPageActive ? (
-            <FirstPage register={register} />
+            <FirstPage
+              register={register}
+              imageFile={imageFile}
+              setImageFile={setImageFile}
+              control={control}
+            />
           ) : (
             <SecondPage register={register} />
           )}
-          <Box>{errors.name?.message}</Box>
           <Box sx={buttonsDivStyles}>
             <FormButtons
               firstPageActive={firstPageActive}
               setFirstPageActive={setFirstPageActive}
               trigger={trigger}
+              handleSubmit={handleSubmit}
+              reset={reset}
+              imageFile={imageFile}
             />
           </Box>
         </form>
+        <Box sx={errorContainerStyles}>
+          <Typography color="error">{errors.name?.message}</Typography>
+        </Box>
       </Box>
     </Box>
   );

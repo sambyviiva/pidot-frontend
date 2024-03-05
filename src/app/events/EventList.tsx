@@ -32,7 +32,6 @@ export const EventList = (props: IEventListProps) => {
   return (
     <List>
       {props.events.map((event: any) => {
-        console.log(`test: ${JSON.stringify(event)}`);
         return (
           <Link key={event._id} href={`events/${event._id}`}>
             <ListItem key={event.id} disablePadding sx={listItemStyle}>

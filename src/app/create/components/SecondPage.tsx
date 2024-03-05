@@ -1,7 +1,8 @@
 import { Box, Switch, SxProps, TextField, Typography } from "@mui/material";
-import { fieldFullStyles } from "../page";
+import { fieldFullStyles, fullFieldContainerStyles } from "../page";
 import { UseFormRegister } from "react-hook-form";
 import { FormInputs } from "../../../../lib/types";
+import { useEffect } from "react";
 
 const invTitleStyles: SxProps = {
   display: "flex",
@@ -35,8 +36,13 @@ interface ISecondPageProps {
 export const SecondPage = (props: ISecondPageProps) => {
   const { register } = props;
 
+  useEffect(() => {
+    
+  }, [])
+
   return (
     <Box sx={{ width: "320px" }}>
+
       <Box sx={invTitleStyles}>
         <Typography color="secondary" variant="h5">
           Invitations
@@ -49,7 +55,9 @@ export const SecondPage = (props: ISecondPageProps) => {
         <input
           type="number"
           style={{ width: "70px" }}
-          {...register("invitationCount")}
+          {...register("invitationCount", {
+            valueAsNumber: true,
+          })}
         />
       </Box>
       <Box sx={invAvecsWelcomeStyles}>
@@ -85,10 +93,22 @@ export const SecondPage = (props: ISecondPageProps) => {
         <input
           type="number"
           style={{ width: "70px" }}
-          {...register("avecCount")}
+          {...register("avecCount", {
+            valueAsNumber: true,
+          })}
         />
       </Box>
-      <Box>
+      <Box sx={fullFieldContainerStyles}>
+        <TextField
+          multiline
+          rows={4}
+          sx={fieldFullStyles}
+          label="Description"
+          variant="outlined"
+          {...register("description")}
+        />
+      </Box>
+      {/* <Box>
         <TextField
           multiline
           rows={8}
@@ -97,7 +117,7 @@ export const SecondPage = (props: ISecondPageProps) => {
           variant="outlined"
           {...register("attendeesList")}
         />
-      </Box>
+      </Box> */}
     </Box>
   );
 };

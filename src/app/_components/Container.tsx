@@ -5,7 +5,11 @@ interface IContainerProps {
 }
 
 const AppContainer = (props: IContainerProps) => {
-  return <Container maxWidth="md">{props.children}</Container>;
+  return (
+    <Container maxWidth="md" sx={{ marginTop: "5px" }}>
+      {props.children}
+    </Container>
+  );
 };
 
 export default AppContainer;

@@ -13,6 +13,9 @@ import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { APP_NAME, pages } from "../_common/constants";
 import Link from "next/link";
+import Image from "next/image";
+import logPic from "./pidot_logo.jpeg";
+import { APP_BACKGROUNG_RGB_COLOR_STRING } from "../_common/styles";
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
@@ -44,21 +47,31 @@ const Header = () => {
         <Toolbar disableGutters>
           {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
           <Link id="logo" href={"/"}>
-            <Typography
-              variant="h6"
-              noWrap
+            <Box
               sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                width: "175px",
               }}
             >
-              {APP_NAME}
-            </Typography>
+              <Image src={logPic} alt="Pi" width={50} height={50} />
+              <Typography
+                variant="h5"
+                noWrap
+                sx={{
+                  mr: 2,
+                  display: { xs: "none", md: "flex" },
+                  fontFamily: "monospace",
+                  fontWeight: 700,
+                  letterSpacing: ".3rem",
+                  color: APP_BACKGROUNG_RGB_COLOR_STRING,
+                  textDecoration: "none",
+                }}
+              >
+                {APP_NAME}
+              </Typography>
+            </Box>
           </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -88,14 +101,22 @@ const Header = () => {
               onClose={handleCloseNavMenu}
               sx={{
                 display: { xs: "block", md: "none" },
+                color: "primary",
               }}
             >
               {pages.map((page) => (
-                <Link key={page.id} href={`/${page.id}`}>
+                <Button
+                  component={Link}
+                  href={`/${page.id}`}
+                  key={page.id}
+                  sx={{ color: APP_BACKGROUNG_RGB_COLOR_STRING }}
+                >
+                  {/* <Link key={page.id} href={`/${page.id}`}> */}
                   <MenuItem onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">{page.name}</Typography>
                   </MenuItem>
-                </Link>
+                  {/* </Link> */}
+                </Button>
               ))}
             </Menu>
           </Box>
@@ -123,7 +144,12 @@ const Header = () => {
               <Link key={page.id} href={`/${page.id}`}>
                 <Button
                   onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
+                  sx={{
+                    my: 2,
+                    display: "block",
+                    color: APP_BACKGROUNG_RGB_COLOR_STRING,
+                    fontWeight: 700,
+                  }}
                 >
                   {page.name}
                 </Button>
