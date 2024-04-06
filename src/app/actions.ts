@@ -75,6 +75,6 @@ export const getImageFromS3Action = async () => {
   };
   const command: GetObjectCommand = new GetObjectCommand(commandInput);
   const response = await s3Client.send(command);
-  const responseString = await response.Body?.transformToString()
+  const responseString = await response.Body?.transformToString();
   console.log(`respons: ${responseString}`);
 };

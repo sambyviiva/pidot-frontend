@@ -11,6 +11,7 @@ import { addEvent } from "./actions/addEvent";
 import { FirstPage } from "./components/FirstPage";
 import { FormButtons } from "./components/FormButtons";
 import { SecondPage } from "./components/SecondPage";
+import { Multiform } from "./components/Multiform";
 
 const FIELD_CONTAINER_WIDTH = "400px";
 
@@ -125,7 +126,7 @@ const CreateNew: React.FC = () => {
     reset,
     trigger,
     formState: { errors },
-    control
+    control,
   } = useForm<FormInputs>({
     // resolver: zodResolver(FormInputsSchema),
   });
@@ -138,8 +139,8 @@ const CreateNew: React.FC = () => {
             Create Event
           </Typography>
         </Box>
-
-        <form>
+        <Multiform />
+        {/* <form>
           {firstPageActive ? (
             <FirstPage
               register={register}
@@ -160,7 +161,7 @@ const CreateNew: React.FC = () => {
               imageFile={imageFile}
             />
           </Box>
-        </form>
+        </form> */}
         <Box sx={errorContainerStyles}>
           <Typography color="error">{errors.name?.message}</Typography>
         </Box>

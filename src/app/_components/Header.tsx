@@ -14,7 +14,8 @@ import * as React from "react";
 import { APP_NAME, pages } from "../_common/constants";
 import Link from "next/link";
 import Image from "next/image";
-import logPic from "./pidot_logo.jpeg";
+import log2Pic from "./pidot_logo.jpeg";
+import logPic from "./viritelma.png";
 import { APP_BACKGROUNG_RGB_COLOR_STRING } from "../_common/styles";
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
