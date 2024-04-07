@@ -35,7 +35,7 @@ const CategorySelect = (props: ICategorySelect) => {
             value={categoryValue}
             onChange={handleChange}
             sx={{
-              width: "300px",
+              width: "400px",
               color: "white"
             }}
             label="Category"
