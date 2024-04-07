@@ -1,6 +1,7 @@
 import { Box, SxProps, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { EventList } from "./EventList";
+import { getEvents } from "./actions/getEvents";
 
 const pageContainer: SxProps = {
   display: "flex",
@@ -15,15 +16,7 @@ const eventsContainer: SxProps = {
 };
 
 const MyEvents: React.FC = async () => {
-  const response = await fetch(`https://pidot-event-api.onrender.com/event`, {
-    method: "GET",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json;charset=UTF-8",
-    },
-  });
-
-  const data = await response.json();
+  const response = await getEvents();
   return (
     <Box sx={pageContainer}>
       <Box sx={eventsContainer}>
@@ -31,10 +24,8 @@ const MyEvents: React.FC = async () => {
           variant="h3"
           color="secondary"
           style={{ padding: "20px 0" }}
-        >
-          My Events
-        </Typography>
-        <EventList events={data} />
+        ></Typography>
+        <EventList events={response} />
       </Box>
     </Box>
   );

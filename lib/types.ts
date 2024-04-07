@@ -6,11 +6,8 @@ export const FormInputsSchema = z.object({
   end: z.string().optional().optional(),
   location: z.string().optional(),
   description: z.string().optional(),
-  invitationCount: z.union([z.number(), z.nan()]),
-  avecCount: z.union([z.number(), z.nan()]),
-  category: z.string().optional(),
+  invitationCount: z.union([z.number(), z.nan()]).optional(),
+  avecCount: z.union([z.number(), z.nan()]).optional(),
 });
 
 export type FormInputs = z.infer<typeof FormInputsSchema>;
-
-

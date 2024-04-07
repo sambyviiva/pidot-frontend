@@ -20,7 +20,8 @@ export const addEvent = async (newEvent: unknown) => {
 
   try {
     const response = await axios.post(
-      "https://pidot-event-api.onrender.com/event",
+      "localhost:8000/event",
+      // "https://pidot-event-api.onrender.com/event",
       inputValidationResult.data
     );
     console.log(`Event added with response: ${JSON.stringify(response.data)}`);

@@ -9,7 +9,7 @@ interface IDropzoneProps {
   setImageFile: (file: File) => void;
 }
 
-const Dropzone = (props: IDropzoneProps) => {
+const ImageDropzone = (props: IDropzoneProps) => {
   const [base64Image, setBase64Image] = useState<string | ArrayBuffer | null>(
     null
   );
@@ -47,7 +47,7 @@ const Dropzone = (props: IDropzoneProps) => {
   const theme = useTheme();
 
   const focusedStyle = {
-    borderColor: "#f57c00",
+    borderColor: "#f500e9",
   };
 
   const acceptStyle = {
@@ -115,4 +115,4 @@ const Dropzone = (props: IDropzoneProps) => {
   );
 };
 
-export default Dropzone;
+export default ImageDropzone;
