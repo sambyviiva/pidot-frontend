@@ -75,16 +75,25 @@ export const Multiform = () => {
   const [avecsWelcome, setAvecsWelcome] = useState<boolean>(false);
   const [createdId, setCreatedId] = useState<string>();
 
-  const processForm: SubmitHandler<FormInputs> = async (data) => {
-    console.log(JSON.stringify(data));
-    const response = await addEvent(data);
+  const router = useRouter();
 
-    setCreatedId("123123123");
+  const processForm: SubmitHandler<FormInputs> = async (data) => {
+    console.log(
+      `Staring server action to Adding event with form data: ${JSON.stringify(
+        data
+      )}`
+    );
+    const response = await addEvent(data);
 
     if (response?.error) {
       console.error("Server error: " + response.error);
+    } else {
+
+      console.error("Response: " + JSON.stringify(response));
+
+      reset();
+      router.push("/events/" + response.id);
     }
-    reset();
   };
 
   const next = async () => {
@@ -116,8 +125,15 @@ export const Multiform = () => {
   if (createdId) {
     return (
       <Box>
-        <Typography>Event Created Succesfully!</Typography>
-        <Typography>{`Link to event: http://localhost:3000/events/${createdId}`}</Typography>
+        <Typography color="primary">Event Created Succesfully!</Typography>
+        <Typography color="primary">{`Link to event: http://localhost:3000/events/${createdId}`}</Typography>
+        <Button
+          onClick={() => {
+            router.push("/event/" + createdId);
+          }}
+        >
+          View Event
+        </Button>
       </Box>
     );
   }
