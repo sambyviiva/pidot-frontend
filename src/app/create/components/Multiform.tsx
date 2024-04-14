@@ -52,7 +52,7 @@ const invAvecCountStyles: SxProps = {
   display: "flex",
   alignItems: "center",
   ml: "20px",
-  mb: "70px",
+  mb: "40px",
 };
 
 const fullFieldContainerStyles: SxProps = {
@@ -144,7 +144,7 @@ export const Multiform = () => {
     return (
       <Box>
         <Typography color="primary">Event Created Succesfully!</Typography>
-        <Typography color="primary">{`Link to event: http://localhost:3000/events/${createdId}`}</Typography>
+        <Typography color="primary">{`Link to event: ${process.env.EXTERNAL_SERVER_URL}/events/${createdId}`}</Typography>
         <Button
           onClick={() => {
             router.push("/event/" + createdId);
@@ -177,7 +177,10 @@ export const Multiform = () => {
                 }}
               >
                 <TextField
-                  sx={fieldFullStyles}
+                  sx={{
+                    ...fieldFullStyles,
+                    "& .MuiInputBase-root": { height: 40 },
+                  }}
                   label="Event name"
                   variant="standard"
                   color="primary"
@@ -238,7 +241,7 @@ export const Multiform = () => {
               </Box>
               <Box sx={fullFieldContainerStyles}>
                 <TextField
-                  sx={fieldFullStyles}
+                  sx={{ ...fieldFullStyles }}
                   label="Location"
                   variant="standard"
                   {...register("location")}
@@ -308,11 +311,14 @@ export const Multiform = () => {
             </Box>
             <Box sx={fullFieldContainerStyles}>
               <TextField
+                sx={{
+                  ...fieldFullStyles,
+                  "& .MuiInputBase-root": { height: 110 },
+                }}
+                variant="standard"
                 multiline
                 rows={4}
-                sx={fieldFullStyles}
                 label="Description"
-                variant="outlined"
                 {...register("description")}
               />
             </Box>

@@ -21,8 +21,9 @@ export const theme = createTheme({
     MuiInput: {
       styleOverrides: {
         root: ({ theme }) => ({
-          color: theme.palette.primary.dark,
+          color: theme.palette.secondary.light,
           backgroundColor: theme.palette.primary.dark,
+          paddingLeft: "8px",
           height: "40px",
           ":before": {
             borderBottom: `1px solid ${theme.palette.primary.dark}`,
@@ -69,7 +70,7 @@ export const theme = createTheme({
         root: ({ theme }) => ({
           color: theme.palette.secondary.light,
           zIndex: 100,
-          paddingLeft: "4px",
+          paddingLeft: "8px",
           paddingTop: "4px",
         }),
       },

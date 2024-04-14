@@ -28,7 +28,8 @@ const eventsContainer: SxProps = {
 };
 
 const EventInfo = (props: IProps) => {
-  console.log(JSON.stringify(props.event));
+  const [name, setName] = useState("");
+
   return (
     <Box sx={eventsContainer}>
       <Typography variant="h3" color="secondary" style={{ padding: "20px 0" }}>
@@ -39,7 +40,7 @@ const EventInfo = (props: IProps) => {
           display: "flex",
           width: "260px",
           justifyContent: "space-around",
-          paddingBottom: "8px",
+          paddingBottom: "24px",
         }}
       >
         <Button variant="outlined" color="success">
@@ -93,19 +94,19 @@ const EventInfo = (props: IProps) => {
           </Typography>
         </Typography>
       </Box>
-      <Box sx={{ marginTop: "8px" }}>
-        <Typography color="primary">Name:</Typography>
+      <Box sx={{ mt: "24px" }}>
         <TextField
           label="Name"
-          sx={{ width: "350px" }}
-          // value={name}
-          // onChange={(e) => setName(e.target.value)}
+          variant="standard"
+          sx={{ width: "350px", mb: "12px" }}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
         <Box sx={{ display: "flex", justifyContent: "center" }}>
           <Box
             sx={{
               display: "flex",
-              width: "170px",
+              width: "280px",
               justifyContent: "space-between",
               marginTop: "16px",
             }}
@@ -113,19 +114,23 @@ const EventInfo = (props: IProps) => {
             <Button
               variant="contained"
               color="error"
-              onClick={() =>
-                postAnswer("Sami V Test", "658743f76afff7f6f57554f9", "no")
-              }
+              onClick={() => postAnswer(name, props.event.id, "no")}
               // onClick={() => postAnswer(name, props.params.id, "no")}
             >
               No
             </Button>
             <Button
               variant="contained"
+              color="info"
+              onClick={() => postAnswer(name, props.event.id, "maybe")}
+              // onClick={() => postAnswer(name, props.params.id, "no")}
+            >
+              Maybe
+            </Button>
+            <Button
+              variant="contained"
               color="success"
-              onClick={() =>
-                postAnswer("Sami V Test", "658743f76afff7f6f57554f9", "yes")
-              }
+              onClick={() => postAnswer(name, props.event.id, "yes")}
             >
               Yes
             </Button>
