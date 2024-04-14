@@ -304,7 +304,7 @@ export const Multiform = () => {
         {currentStep === 2 && (
           <Box>
             <Typography
-              sx={{ marginBottom: "5px" }}
+              sx={{ mb: "5px", mt: "40px" }}
               variant="h6"
               color={theme.palette.primary.main}
             >
