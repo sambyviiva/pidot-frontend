@@ -42,7 +42,7 @@ export const EventList = (props: IEventListProps) => {
                     color: theme.palette.secondary.main,
                   }}
                   primary={event.name}
-                  secondary={event.location}
+                  secondary={event.location ?? "No location"}
                 />
               </ListItemButton>
             </ListItem>

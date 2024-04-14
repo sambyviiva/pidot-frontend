@@ -4,23 +4,28 @@ import { orange, grey } from "@mui/material/colors";
 export const theme = createTheme({
   palette: {
     primary: {
-      main: "#B4A0E5",
-      dark: orange[700],
+      main: "#37966f",
+      dark: "#356859",
       // main: orange[500],
       // dark: orange[700],
     },
     secondary: {
-      main: "#FEF250",
+      main: "#fd5523",
       // main: grey[200],
+      light: grey[100],
     },
+
+    // background: {},
   },
   components: {
     MuiInput: {
       styleOverrides: {
         root: ({ theme }) => ({
-          color: theme.palette.secondary.main,
+          color: theme.palette.primary.dark,
+          backgroundColor: theme.palette.primary.dark,
+          height: "40px",
           ":before": {
-            borderBottom: `1px solid ${theme.palette.secondary.main}`,
+            borderBottom: `1px solid ${theme.palette.primary.dark}`,
           },
         }),
       },
@@ -31,7 +36,7 @@ export const theme = createTheme({
           color: "white",
           "& .MuiOutlinedInput-notchedOutline": {
             borderColor: theme.palette.primary.main,
-            borderWidth: 2,
+            // borderWidth: 2,
           },
           "&:hover .MuiOutlinedInput-notchedOutline": {
             borderColor: theme.palette.primary.dark,
@@ -45,16 +50,16 @@ export const theme = createTheme({
     MuiSelect: {
       styleOverrides: {
         icon: ({ theme }) => ({
-          color: theme.palette.secondary.main,
+          // color: theme.palette.secondary.main,
         }),
       },
     },
     MuiFilledInput: {
       styleOverrides: {
         root: ({ theme }) => ({
-          color: theme.palette.secondary.main,
+          color: theme.palette.secondary.light,
           ":before": {
-            borderBottom: `1px solid ${theme.palette.secondary.main}`,
+            // borderBottom: `1px solid ${theme.palette.secondary.main}`,
           },
         }),
       },
@@ -62,7 +67,10 @@ export const theme = createTheme({
     MuiInputLabel: {
       styleOverrides: {
         root: ({ theme }) => ({
-          color: theme.palette.secondary.main,
+          color: theme.palette.secondary.light,
+          zIndex: 100,
+          paddingLeft: "4px",
+          paddingTop: "4px",
         }),
       },
     },

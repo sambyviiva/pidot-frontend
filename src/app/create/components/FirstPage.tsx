@@ -22,7 +22,7 @@ import {
 } from "../page";
 import { Control, UseFormRegister } from "react-hook-form";
 import { FormInputs } from "../../../../lib/types";
-import Dropzone from "./Dropzone";
+import Dropzone from "./ImageDropzone";
 import CategorySelect from "./CategorySelect";
 
 interface IFirstPageProps {

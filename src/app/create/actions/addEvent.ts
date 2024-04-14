@@ -2,7 +2,6 @@
 
 import axios, { isAxiosError } from "axios";
 import { FormInputsSchema } from "../../../../lib/types";
-import { Nova_Slim } from "next/font/google";
 
 export const addEvent = async (newEvent: unknown) => {
   // server side validation
@@ -20,10 +19,11 @@ export const addEvent = async (newEvent: unknown) => {
 
   try {
     const response = await axios.post(
-      "https://pidot-event-api.onrender.com/event",
+      "http://127.0.0.1:8000/event",
+      // "https://pidot-event-api.onrender.com/event",
       inputValidationResult.data
     );
-    console.log(`Event added with response: ${JSON.stringify(response.data)}`);
+    return response.data;
   } catch (e: unknown) {
     if (isAxiosError(e)) {
       return {

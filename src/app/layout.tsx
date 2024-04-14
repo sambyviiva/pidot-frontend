@@ -7,6 +7,8 @@ import Header from "./_components/Header";
 import ThemeRegistry from "./_theme/ThemeRegistry";
 import Provider from "./_trpc/Provider";
 import "./globals.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -26,13 +28,14 @@ export default function RootLayout({
         // className={inter.className}
         style={{ backgroundColor: APP_BACKGROUNG_RGB_COLOR_STRING }}
       >
-          <ThemeRegistry options={{ key: "mui-theme" }}>
-            <Provider>
-              <Header />
-              <AppContainer>{children}</AppContainer>
-              {/* <Footer /> */}
-            </Provider>
-          </ThemeRegistry>
+        <ThemeRegistry options={{ key: "mui-theme" }}>
+          <ToastContainer />
+          <Provider>
+            <Header />
+            <AppContainer>{children}</AppContainer>
+            {/* <Footer /> */}
+          </Provider>
+        </ThemeRegistry>
       </body>
     </html>
   );
