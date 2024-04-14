@@ -9,8 +9,8 @@ import {
   Typography,
 } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
-import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
-import CloseIcon from '@mui/icons-material/Close';
+import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
+import CloseIcon from "@mui/icons-material/Close";
 import Image from "next/image";
 import testPic from "../testi_event_kuva.jpg";
 import { postAnswer } from "../actions/postAnswer";
@@ -34,7 +34,14 @@ const EventInfo = (props: IProps) => {
       <Typography variant="h3" color="secondary" style={{ padding: "20px 0" }}>
         {props.event.name}
       </Typography>
-      <Box sx={{display: "flex", width: "260px", justifyContent: "space-around", paddingBottom: "8px"}}>
+      <Box
+        sx={{
+          display: "flex",
+          width: "260px",
+          justifyContent: "space-around",
+          paddingBottom: "8px",
+        }}
+      >
         <Button variant="outlined" color="success">
           <CheckIcon color="success" />
           {props.event.participants?.length ?? "0"}
@@ -52,15 +59,17 @@ const EventInfo = (props: IProps) => {
       <Box>
         <Typography
           component="p"
-          color="secondary"
+          color="primary"
           sx={{
             width: "350px",
-            height: "100px",
+            // height: "100px",
             overflow: "scroll",
             marginBottom: "8px",
           }}
         >
-          Kuvaus kaikkea kivaa jee jeee tähän tulee ssitten tapahtuman Kuvaus
+          {props.event.description}
+
+          {/* Kuvaus kaikkea kivaa jee jeee tähän tulee ssitten tapahtuman Kuvaus
           kaikkea kivaa jee jeee tähän tulee ssitten tapahtuman Kuvaus kaikkea
           kivaa jee jeee tähän tulee ssitten tapahtuman Kuvaus kaikkea kivaa jee
           jeee tähän tulee ssitten tapahtuman Kuvaus kaikkea kivaa jee jeee
@@ -68,22 +77,24 @@ const EventInfo = (props: IProps) => {
           tulee ssitten tapahtuman Kuvaus kaikkea kivaa jee jeee tähän tulee
           ssitten tapahtuman Kuvaus kaikkea kivaa jee jeee tähän tulee ssitten
           tapahtuman Kuvaus kaikkea kivaa jee jeee tähän tulee ssitten
-          tapahtuman kuvauksesta kuvauksesta kuvauksesta kuvauksesta kuvauksesta
+          tapahtuman kuvauksesta kuvauksesta kuvauksesta kuvauksesta kuvauksesta */}
         </Typography>
-        <Typography color="secondary" component="p">
-          Sijainti joku kiva, parhaimmillaan google maps
+        <Typography color="primary" component="p">
+          {props.event.location ?? "Ei sijaintia"}
         </Typography>
-        <Typography component="p" color="secondary">
-          Ehkä jopa osoite
-        </Typography>
-        <Typography component="p" color="secondary">
-          From {"10/12/2023 18:30"} until {"10/12/2023 18:30"}
+        <Typography component="p" color="primary">
+          From
+          <Typography component="span" sx={{ fontWeight: 700 }}>
+            {` ${new Date(props.event.startDate).toDateString()} `}
+          </Typography>
+          until
+          <Typography component="span" sx={{ fontWeight: 700 }}>
+            {` ${new Date(props.event.endDate).toDateString()}`}
+          </Typography>
         </Typography>
       </Box>
       <Box sx={{ marginTop: "8px" }}>
-        <Typography color="secondary" sx={{ marginBottom: "8px" }}>
-          Send response:
-        </Typography>
+        <Typography color="primary">Name:</Typography>
         <TextField
           label="Name"
           sx={{ width: "350px" }}
