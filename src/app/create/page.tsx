@@ -7,10 +7,6 @@ import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FormInputs, FormInputsSchema } from "../../../lib/types";
 import { APP_BACKGROUND } from "../_common/styles";
-import { addEvent } from "./actions/addEvent";
-import { FirstPage } from "./components/FirstPage";
-import { FormButtons } from "./components/FormButtons";
-import { SecondPage } from "./components/SecondPage";
 import { Multiform } from "./components/Multiform";
 
 const FIELD_CONTAINER_WIDTH = "400px";
@@ -47,32 +43,7 @@ const buttonsDivStyles: SxProps = {
   // pt: "40px",
 };
 
-export const fullFieldContainerStyles: SxProps = {
-  display: "flex",
-  justifyContent: "center",
-  width: "100%",
-  pt: "24px",
-};
-
-export const doupleFieldContainerStyles: SxProps = {
-  display: "flex",
-  justifyContent: "space-between",
-  py: "24px",
-  margin: "auto",
-};
-
-export const labelFieldContainerStyles: SxProps = {
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  width: "48%",
-};
-
-export const fieldFullStyles: SxProps = {
-  width: "100%",
-};
-
-export const errorContainerStyles: SxProps = {
+const errorContainerStyles: SxProps = {
   height: "20px",
   paddingTop: "10px",
 };

@@ -19,7 +19,7 @@ export const addEvent = async (newEvent: unknown) => {
 
   try {
     const response = await axios.post(
-      "http://127.0.0.1:8000/event",
+      `${process.env.EXTERNAL_SERVER_URL}/event`,
       // "https://pidot-event-api.onrender.com/event",
       inputValidationResult.data
     );

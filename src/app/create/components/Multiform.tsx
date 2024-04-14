@@ -18,12 +18,6 @@ import {
   MobileDateTimePicker,
 } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import {
-  fullFieldContainerStyles,
-  fieldFullStyles,
-  doupleFieldContainerStyles,
-  labelFieldContainerStyles,
-} from "../page";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FormInputs } from "../../../../lib/types";
 import dayjs, { Dayjs } from "dayjs";
@@ -59,6 +53,31 @@ const invAvecCountStyles: SxProps = {
   alignItems: "center",
   ml: "20px",
   mb: "70px",
+};
+
+const fullFieldContainerStyles: SxProps = {
+  display: "flex",
+  justifyContent: "center",
+  width: "100%",
+  pt: "24px",
+};
+
+const doupleFieldContainerStyles: SxProps = {
+  display: "flex",
+  justifyContent: "space-between",
+  py: "24px",
+  margin: "auto",
+};
+
+const labelFieldContainerStyles: SxProps = {
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  width: "48%",
+};
+
+const fieldFullStyles: SxProps = {
+  width: "100%",
 };
 
 const STEPS = [

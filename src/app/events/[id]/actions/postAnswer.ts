@@ -9,7 +9,7 @@ export const postAnswer = async (
 ) => {
   try {
     const response = await axios.post(
-      "http://localhost:8000/answer",
+      `${process.env.EXTERNAL_SERVER_URL}/answer`,
       //   "https://pidot-event-api.onrender.com/answer",
       {
         name,

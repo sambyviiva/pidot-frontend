@@ -80,7 +80,7 @@ const EventInfo = (props: IProps) => {
           tapahtuman kuvauksesta kuvauksesta kuvauksesta kuvauksesta kuvauksesta */}
         </Typography>
         <Typography color="primary" component="p">
-          {props.event.location ?? "Ei sijaintia"}
+          {props.event.location ?? "No Location"}
         </Typography>
         <Typography component="p" color="primary">
           From
@@ -124,7 +124,7 @@ const EventInfo = (props: IProps) => {
               variant="contained"
               color="success"
               onClick={() =>
-                postAnswer("Sami V Test", "658743f76afff7f6f57554f9", "no")
+                postAnswer("Sami V Test", "658743f76afff7f6f57554f9", "yes")
               }
             >
               Yes
