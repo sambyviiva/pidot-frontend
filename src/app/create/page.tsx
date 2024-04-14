@@ -33,7 +33,8 @@ const fieldsContainerStyles: SxProps = {
 const titleStyles: SxProps = {
   display: "flex",
   justifyContent: "center",
-  pt: "50px",
+  pt: "35px",
+  pb: "35px",
   fontSize: "24px",
   fontWeight: 700,
 };

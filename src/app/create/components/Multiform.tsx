@@ -88,7 +88,6 @@ export const Multiform = () => {
     if (response?.error) {
       console.error("Server error: " + response.error);
     } else {
-
       console.error("Response: " + JSON.stringify(response));
 
       reset();
@@ -155,19 +154,20 @@ export const Multiform = () => {
               <Box
                 sx={{
                   ...fullFieldContainerStyles,
-                  ...{ marginBottom: "60px" },
+                  ...{ marginBottom: "20px" },
                 }}
               >
                 <TextField
                   sx={fieldFullStyles}
                   label="Event name"
                   variant="standard"
+                  color="primary"
                   {...register("name")}
                 />
               </Box>
               <Box sx={doupleFieldContainerStyles}>
                 <Box sx={labelFieldContainerStyles}>
-                  <Typography color="secondary" sx={{ ml: "2px" }}>
+                  <Typography color="primary" sx={{ ml: "2px" }}>
                     Start Time
                   </Typography>
                   <input
@@ -176,19 +176,24 @@ export const Multiform = () => {
                     {...register("start")}
                   />
                   <MobileDateTimePicker
-                    ampm={false}
-                    slotProps={{
-                      textField: {
-                        variant: "filled",
-                      },
+                    sx={{
+                      backgroundColor: theme.palette.primary.dark,
+                      color: "secondary",
                     }}
+                    ampm={false}
+                    // slotProps={{
+                    //   textField: {
+                    //     variant: "filled",
+                    //     size: "small",
+                    //   },
+                    // }}
                     value={start}
                     onChange={(e) => setStart(e)}
                   />
                 </Box>
 
                 <Box sx={labelFieldContainerStyles}>
-                  <Typography color="secondary" sx={{ ml: "2px" }}>
+                  <Typography color="primary" sx={{ ml: "2px" }}>
                     End Time
                   </Typography>
                   <input
@@ -197,12 +202,16 @@ export const Multiform = () => {
                     {...register("end")}
                   />
                   <MobileDateTimePicker
-                    ampm={false}
-                    slotProps={{
-                      textField: {
-                        variant: "filled",
-                      },
+                    sx={{
+                      backgroundColor: theme.palette.primary.dark,
                     }}
+                    ampm={false}
+                    // slotProps={{
+                    //   textField: {
+                    //     variant: "filled",
+                    //     size: "small",
+                    //   },
+                    // }}
                     value={end}
                     onChange={(e) => setEnd(e)}
                   />
@@ -217,7 +226,7 @@ export const Multiform = () => {
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
-                        <AddLocationAlt color="secondary" />
+                        <AddLocationAlt color="primary" />
                       </InputAdornment>
                     ),
                   }}
@@ -231,12 +240,12 @@ export const Multiform = () => {
         {currentStep === 1 && (
           <Box sx={{ width: "320px" }}>
             <Box sx={invTitleStyles}>
-              <Typography color="secondary" variant="h5">
+              <Typography color="primary" variant="h5">
                 Invitations
               </Typography>
             </Box>
             <Box sx={invCountStyles}>
-              <Typography color="secondary" sx={{ mr: "32px" }}>
+              <Typography color="primary" sx={{ mr: "32px" }}>
                 How many invitations
               </Typography>
               <input
@@ -248,7 +257,7 @@ export const Multiform = () => {
               />
             </Box>
             <Box sx={invAvecsWelcomeStyles}>
-              <Typography color="secondary" sx={{ mr: "60px" }}>
+              <Typography color="primary" sx={{ mr: "60px" }}>
                 Avecs Welcome
               </Typography>
               <Switch
@@ -262,7 +271,7 @@ export const Multiform = () => {
             </Box>
             <Box sx={invAvecCountStyles}>
               <Typography
-                color={"secondary"}
+                color="primary"
                 // color={fieldValues.avecsWelcome ? grey[700] : "secondary"}
                 sx={{
                   mr: "40px",
@@ -297,7 +306,7 @@ export const Multiform = () => {
             <Typography
               sx={{ marginBottom: "5px" }}
               variant="h6"
-              color={theme.palette.secondary.main}
+              color={theme.palette.primary.main}
             >
               Add Event Image:
             </Typography>

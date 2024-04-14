@@ -69,7 +69,7 @@ const ImageDropzone = (props: IDropzoneProps) => {
     border: `3px dotted ${theme.palette.primary.main}`,
     borderRadius: 5,
     outline: "none",
-    color: theme.palette.secondary.main,
+    color: theme.palette.primary.main,
   } as React.CSSProperties;
 
   const style = {
