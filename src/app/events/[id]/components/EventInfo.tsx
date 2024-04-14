@@ -12,7 +12,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import CloseIcon from '@mui/icons-material/Close';
 import Image from "next/image";
-import testPic from "../testPic.png";
+import testPic from "../testi_event_kuva.jpg";
 import { postAnswer } from "../actions/postAnswer";
 import { useState } from "react";
 

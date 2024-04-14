@@ -15,7 +15,7 @@ import { APP_NAME, pages } from "../_common/constants";
 import Link from "next/link";
 import Image from "next/image";
 import log2Pic from "./pidot_logo.jpeg";
-import logPic from "./viritelma.png";
+import logPic from "./viritelma2.png";
 import { APP_BACKGROUNG_RGB_COLOR_STRING } from "../_common/styles";
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
