@@ -107,7 +107,7 @@ const ImageDropzone = (props: IDropzoneProps) => {
               marginTop: "20px",
             }}
           >
-            <Button variant="outlined">Browse files</Button>
+            <Button variant="contained">Browse files</Button>
           </Box>
         </Box>
       )}
