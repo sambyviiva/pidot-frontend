@@ -20,6 +20,7 @@ import { APP_BACKGROUNG_RGB_COLOR_STRING } from "../_common/styles";
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const IMAGE_SIZE = 45;
+const IMAGE_SIZE_SM = 36;
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -58,10 +59,10 @@ const Header = () => {
           <Link id="logo" href={"/"}>
             <Box
               sx={{
-                display: { xs: 'none', md: 'flex' },
+                display: { xs: "none", md: "flex" },
                 justifyContent: "space-between",
                 alignItems: "center",
-                mr: 3
+                mr: 3,
               }}
             >
               <Typography
@@ -119,11 +120,13 @@ const Header = () => {
                   key={page.id}
                   sx={{ color: APP_BACKGROUNG_RGB_COLOR_STRING }}
                 >
-                  {/* <Link key={page.id} href={`/${page.id}`}> */}
-                  <MenuItem onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page.name}</Typography>
-                  </MenuItem>
-                  {/* </Link> */}
+                  <Link key={page.id} href={`/${page.id}`}>
+                    <MenuItem onClick={handleCloseNavMenu}>
+                      <Typography textAlign="center" color="primary">
+                        {page.name}
+                      </Typography>
+                    </MenuItem>
+                  </Link>
                 </Button>
               ))}
             </Menu>
@@ -132,8 +135,8 @@ const Header = () => {
             <Image
               src={logPic}
               alt="Pidot"
-              width={IMAGE_SIZE}
-              height={IMAGE_SIZE}
+              width={IMAGE_SIZE_SM}
+              height={IMAGE_SIZE_SM}
             />
           </Box>
 
