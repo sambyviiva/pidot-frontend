@@ -14,11 +14,12 @@ import * as React from "react";
 import { APP_NAME, pages } from "../_common/constants";
 import Link from "next/link";
 import Image from "next/image";
-import log2Pic from "./pidot_logo.jpeg";
 import logPic from "./viritelma2.png";
 import { APP_BACKGROUNG_RGB_COLOR_STRING } from "../_common/styles";
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
+
+const IMAGE_SIZE = 45;
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -46,17 +47,23 @@ const Header = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
+          <Box sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}>
+            <Image
+              src={logPic}
+              alt="Pidot"
+              width={IMAGE_SIZE}
+              height={IMAGE_SIZE}
+            />
+          </Box>
           <Link id="logo" href={"/"}>
             <Box
               sx={{
-                display: "flex",
+                display: { xs: 'none', md: 'flex' },
                 justifyContent: "space-between",
                 alignItems: "center",
-                width: "175px",
+                mr: 3
               }}
             >
-              <Image src={logPic} alt="Pi" width={50} height={50} />
               <Typography
                 variant="h5"
                 noWrap
@@ -121,7 +128,15 @@ const Header = () => {
               ))}
             </Menu>
           </Box>
-          {/* <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} /> */}
+          <Box sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}>
+            <Image
+              src={logPic}
+              alt="Pidot"
+              width={IMAGE_SIZE}
+              height={IMAGE_SIZE}
+            />
+          </Box>
+
           <Typography
             variant="h5"
             noWrap
