@@ -16,11 +16,13 @@ import Link from "next/link";
 import Image from "next/image";
 import logPic from "./viritelma2.png";
 import { APP_BACKGROUNG_RGB_COLOR_STRING } from "../_common/styles";
+import { Tooltip } from "@mui/material";
+import SettingsIcon from "@mui/icons-material/Settings";
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const IMAGE_SIZE = 45;
-const IMAGE_SIZE_SM = 36;
+const IMAGE_SIZE_SM = 34;
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -110,7 +112,7 @@ const Header = () => {
               onClose={handleCloseNavMenu}
               sx={{
                 display: { xs: "block", md: "none" },
-                color: "primary",
+                color: "secondary",
               }}
             >
               {pages.map((page) => (
@@ -176,10 +178,11 @@ const Header = () => {
             ))}
           </Box>
 
-          {/* <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" /> */}
+                <SettingsIcon color="secondary" />
               </IconButton>
             </Tooltip>
             <Menu
@@ -204,7 +207,7 @@ const Header = () => {
                 </MenuItem>
               ))}
             </Menu>
-          </Box> */}
+          </Box>
         </Toolbar>
       </Container>
     </AppBar>
